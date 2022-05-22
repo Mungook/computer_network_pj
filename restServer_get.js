@@ -2,21 +2,29 @@ const http = require('http');
 const fs = require('fs');
 
 http.createServer((req,res)=>{
- // Write your own codes
-    fs.readFile('./about.html', function(error, data) {
-    res.writeHead(200, {'Content-Type' : 'text/html'});
-    res.end(data);
-    })
+    console.log(req.url);
+
+    if(req.url==="/"){
+        res.writeHead(200);
+        res.write('Hello Node.js!!');
+        res.end();
+    }
+
+    if(req.url==="/about"){
+        res.writeHead(200);
+        res.end(fs.readFileSync('about.html'));
+        console.log("html loading...");
+    }
+
     if(req.url==="/photo"){
-        fs.readFile('photo.jpg', function(err, data){
-            console.log('picture loading...');
-            res.writeHead(200, {'Content-Type' : 'image/jpg'});
+        console.log("photo loading...");
+        fs.readFile("photo.jpg", function(err, data){
+            res.writeHead(200);
             res.write(data);
             res.end();    
         });
     }
 
-;
 }).listen(8080, function(){
     console.log('server running on 8080.'); 
 });
