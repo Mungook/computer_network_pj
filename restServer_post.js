@@ -12,7 +12,8 @@ http.createServer((req,res)=>{
             res.end('name : ' + data.name + '\nstudent number : ' + data.number);
         });
     }
+    
 }).listen(8080, function(){
-    console.log('server running on 8080.'); 
+    console.log('waiting on 8080.'); 
 });
 

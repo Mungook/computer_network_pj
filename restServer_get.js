@@ -2,22 +2,22 @@ const http = require('http');
 const fs = require('fs');
 
 http.createServer((req,res)=>{
-    console.log(req.url);
 
+    /* if request url is finished with /, just response printing "hello node js" */
     if(req.url==="/"){
         res.writeHead(200);
         res.write('Hello Node.js!!');
         res.end();
     }
 
+    /* if request url is finished with '/about', response end with reading html file */
     if(req.url==="/about"){
         res.writeHead(200);
         res.end(fs.readFileSync('about.html'));
-        console.log("html loading...");
     }
 
+    /* when reading html, html request photo, so read photo file from the same directory */
     if(req.url==="/photo"){
-        console.log("photo loading...");
         fs.readFile("photo.jpg", function(err, data){
             res.writeHead(200);
             res.write(data);
@@ -25,6 +25,6 @@ http.createServer((req,res)=>{
         });
     }
 
-}).listen(8080, function(){
-    console.log('server running on 8080.'); 
+}).listen(8080, function(){             // listening on port 8080
+    console.log('waiting on 8080.'); 
 });
