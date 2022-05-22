@@ -137,6 +137,7 @@ else{
                 }
 ```
 partition the case for when not all data is requested to delete
+
 when client requests the data that doesn't exist, print error on console
 #### POSTMAN screenshot
 ![image](https://user-images.githubusercontent.com/43840486/169692089-97107e66-ecc8-4afb-bd97-ccba3d8b5269.png)
