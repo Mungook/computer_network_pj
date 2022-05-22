@@ -1,17 +1,18 @@
 const http = require('http');
 var queryString = require('querystring');
-var data;
+var data;   // global variable for storing client's data
 
 http.createServer((req,res)=>{
- // Write your own codes
-   
     if(req.method == 'PUT'){
         req.on('data', function(chunk){
-            var temp = queryString.parse(chunk.toString());
+            var temp = queryString.parse(chunk.toString()); // temp variable for storing client's request
+            /* when the input is initial, the stored data is null, so print the message at console and update data */
             if(!data){
                 console.log("initial data...");
                 data = temp;
             }
+            /* when only one part of the data is requested, only requested part should be updated */
+            /* the updating behavior is implemented by the global variable and the temp variable */
             else{
                 if(temp.name == undefined && temp.number != undefined){
                     data.number = temp.number;
@@ -35,34 +36,3 @@ http.createServer((req,res)=>{
 }).listen(8080, function(){
     console.log('waiting on 8080.'); 
 });
-
-
-/* 1. nan
-        4가지
-        1. nan 없는경우
-        2. 하나씩 있는 경우
-        3. 둘다 nan인 경우
-        
-    2. nan 없다 = 두 값 다 변경 
-    
-
-    if(기존에 no data)
-        // if(nan 둘 중 하나라도)
-        //    1. nan name
-        //    2. nan number
-    else -> 바뀐값만 대입
-        // if(nan 둘 중 하나라도)
-            1. nan name
-                name은 예전값, number는 최신값
-            2. nan number
-                name은 최신값, number는 예전값
-
-    nan 없는 정상 값 입력시
-    data = temp 하면 되겟지?
-    하고 프린트
-    
-    
-    
-    
-*/
-
